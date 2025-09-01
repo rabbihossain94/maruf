@@ -1,0 +1,51 @@
+import React, { useState } from "react";
+
+export default function Events() {
+  const [status, setStatus] = useState("none"); // none, joined, pending, approved
+
+  const handleJoin = () => setStatus("joined");
+  const handleLeave = () => setStatus("pending");
+
+  return (
+    <div className="p-4 space-y-4">
+      <h1 className="text-2xl font-bold mb-4">Events</h1>
+      <div className="bg-white p-4 rounded-xl shadow-md">
+        <img
+          src="https://source.unsplash.com/600x200/?clean,city"
+          alt="event"
+          className="rounded-md mb-3"
+        />
+        <h2 className="text-lg font-semibold">BD Clean City Event</h2>
+        <p className="text-sm text-gray-600">Time: 10 AM - 1 PM</p>
+        <div className="mt-3">
+          {status === "none" && (
+            <button
+              onClick={handleJoin}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+            >
+              Join
+            </button>
+          )}
+          {status === "joined" && (
+            <button
+              onClick={handleLeave}
+              className="px-4 py-2 bg-red-600 text-white rounded-lg"
+            >
+              Leave
+            </button>
+          )}
+          {status === "pending" && (
+            <span className="px-4 py-2 bg-yellow-500 text-white rounded-lg">
+              Pending (Admin Approval)
+            </span>
+          )}
+          {status === "approved" && (
+            <span className="px-4 py-2 bg-green-600 text-white rounded-lg">
+              Approved
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
